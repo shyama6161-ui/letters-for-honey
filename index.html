@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Honey ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+background:black;
+color:white;
+}
+
+/* SLIDER */
+.slider{
+display:flex;
+width:600%;
+height:100vh;
+transition:1s cubic-bezier(.77,0,.18,1);
+}
+
+/* EACH SLIDE */
+.slide{
+width:100vw;
+height:100vh;
+flex-shrink:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+}
+
+/* BACKGROUNDS */
+.bg1{
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url("https://images.unsplash.com/photo-1519681393784-d120267933ba");
+background-size:cover;
+background-position:center;
+}
+
+.bg2{background:#5a1f3d;}
+.bg3{background:#141e30;}
+.bg4{background:#111;}
+.bg5{background:#3d1428;}
+.bg6{background:#000;}
+
+/* BUTTON */
+button{
+padding:15px 35px;
+border:none;
+border-radius:40px;
+background:#ff4f81;
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:40px;
+transition:.3s;
+box-shadow:0 0 20px rgba(255,79,129,.6);
+}
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 40px rgba(255,79,129,1);
+}
+
+/* ENVELOPE */
+.envelope{
+width:160px;
+height:100px;
+background:#ff4f81;
+position:relative;
+margin:40px;
+cursor:pointer;
+transition:.6s;
+}
+.envelope:before{
+content:'';
+position:absolute;
+top:-50px;
+left:0;
+border-left:80px solid transparent;
+border-right:80px solid transparent;
+border-bottom:50px solid #ff4f81;
+}
+.opened{transform:rotateX(180deg);}
+
+.hidden{display:none;}
+
+input{
+padding:12px;
+border-radius:30px;
+border:none;
+text-align:center;
+margin-top:20px;
+}
+
+h1{font-size:42px;margin-bottom:20px;}
+h2{margin-bottom:10px;}
+p{max-width:400px;line-height:1.6;}
+</style>
+</head>
+
+<body>
+
+<div class="slider" id="slider">
+
+<!-- PASSWORD -->
+<div class="slide bg1">
+<h1>Only For Honey 💖</h1>
+<p>Enter our special date</p>
+<input type="password" id="pass">
+<button onclick="unlock()">Unlock</button>
+<p id="error" style="color:pink;margin-top:10px;"></p>
+</div>
+
+<!-- LANDING -->
+<div class="slide bg1">
+<h1>Letters For You ❤️</h1>
+<h2>Honey & Shyam</h2>
+<p>A story written in heartbeats.</p>
+<button onclick="nextSlide()">Begin</button>
+</div>
+
+<!-- OPEN WHEN -->
+<div class="slide bg2">
+<h1>💌 Open When...</h1>
+<div class="envelope" onclick="openEnvelope(this)"></div>
+<p id="letters" class="hidden">
+When you are sad → I’m always with you.<br><br>
+When you miss me → Feel my hug 🤗<br><br>
+When insecure → You are more than enough.<br><br>
+When exams stress you → Future doctor energy 😌
+</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- EVERYTHING -->
+<div class="slide bg3">
+<h1>💖 Everything I Love About You</h1>
+<p>
+Your smile ❤️<br>
+Your eyes ✨<br>
+Your hugs 🤗<br>
+Your voice 🎶<br>
+The way you say Shyam 💕
+</p>
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SONG -->
+<div class="slide bg4">
+<h1>🎵 Our Song – CO2</h1>
+
+<iframe style="border-radius:12px" 
+src="https://open.spotify.com/embed/track/3hB9lDLyAClYVZivMMl20N"
+width="320" height="180"
+frameBorder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+
+<button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- LETTER -->
+<div class="slide bg5">
+<h1>💌 The Sweet Letter</h1>
+<p id="typewriter"></p>
+<button onclick="nextSlide()">Finish</button>
+</div>
+
+</div>
+
+<script>
+let current=0;
+function nextSlide(){
+current++;
+document.getElementById("slider").style.transform="translateX(-"+current*100+"vw)";
+}
+
+function unlock(){
+if(document.getElementById("pass").value==="0825"){
+nextSlide();
+}else{
+document.getElementById("error").innerText="Wrong password 💔";
+}
+}
+
+function openEnvelope(el){
+el.classList.add("opened");
+document.getElementById("letters").classList.remove("hidden");
+}
+
+/* TYPEWRITER */
+var text="Honey,\n\nIf I could love you for one more day, I would choose forever.\n\nYou are my calm, my strength, my happiness in everything.\n\nForever yours,\nShyam ❤️";
+var i=0;
+function typeWriter(){
+if(i<text.length){
+document.getElementById("typewriter").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,40);
+}
+}
+setTimeout(typeWriter,5000);
+</script>
+
+</body>
+</html>
