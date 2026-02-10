@@ -1,267 +1,228 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Letters For You ❤️</title>
+<title>Shyam ❤️ Honey</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  overflow-x:hidden;
-  color:white;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+color:#333;
+overflow-x:hidden;
 }
 
-/* LANDING PAGE */
-.hero{
-  height:100vh;
-  background:
-  linear-gradient(rgba(90,0,50,0.6),rgba(90,0,50,0.6)),
-  url('https://images.unsplash.com/photo-1519681393784-d120267933ba');
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.hero h1{font-size:40px;margin:10px;}
-.hero h2{font-weight:300;margin:5px;}
-.hero p{opacity:0.8;}
-.hero button{
-  margin-top:20px;
-  padding:12px 30px;
-  border:none;
-  border-radius:30px;
-  background:#ff4d6d;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-
-/* PAGES */
 .page{
-  display:none;
-  min-height:100vh;
-  padding:40px 20px;
-  text-align:center;
-  background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
-  background-size:400% 400%;
-  animation:gradient 12s ease infinite;
-  color:#333;
-}
-@keyframes gradient{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+display:none;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+text-align:center;
 }
 
-.active{display:block;}
-
-.card{
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.2);
-  max-width:350px;
-  margin:auto;
+.active{
+display:flex;
 }
 
-input{
-  padding:15px;
-  width:100%;
-  border-radius:15px;
-  border:2px solid #eee;
-  margin:20px 0;
-  font-size:18px;
-  text-align:center;
+/* HOME PAGE */
+#home{
+background:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') center/cover no-repeat;
+color:white;
+}
+
+.overlay{
+background:rgba(0,0,0,0.5);
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+}
+
+.home-content{
+position:relative;
+z-index:2;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
 }
 
 button{
-  padding:12px 30px;
-  border:none;
-  border-radius:30px;
-  background:#ff4d6d;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  margin-top:20px;
+background:#ff4e73;
+color:white;
+border:none;
+padding:12px 30px;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+}
+
+/* UNLOCK */
+.unlock-box{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+width:90%;
+max-width:400px;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-top:20px;
+border-radius:15px;
+border:1px solid #ddd;
+text-align:center;
+font-size:18px;
+}
+
+/* LETTERS */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+width:100%;
+max-width:500px;
+margin-top:30px;
+}
+
+.card{
+background:#ff6f91;
+padding:30px;
+border-radius:20px;
+color:white;
+font-weight:500;
+}
+
+/* SONG */
+.song-box{
+background:#8b0000;
+color:white;
+padding:20px;
+border-radius:20px;
+width:90%;
+max-width:500px;
+margin-top:30px;
+}
+
+/* VALENTINE */
+.options{
+display:flex;
+gap:20px;
+margin-top:30px;
 }
 
 img{
-  width:90%;
-  max-width:350px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* ENVELOPE GRID */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin-top:30px;
-}
-
-.envelope{
-  background:#ff758f;
-  border-radius:20px;
-  padding:30px 15px;
-  color:white;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
-}
-.envelope:before{
-  content:"💌";
-  display:block;
-  font-size:28px;
-  margin-bottom:10px;
-}
-
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.5);
-  justify-content:center;
-  align-items:center;
-}
-.modal-content{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  width:80%;
-  color:#333;
-}
-
-/* HEART SPRINKLE */
-.hearts{
-  position:fixed;
-  font-size:20px;
-  animation:fall 2s linear forwards;
-}
-@keyframes fall{
-  0%{transform:translateY(0);opacity:1;}
-  100%{transform:translateY(-400px);opacity:0;}
+width:200px;
+border-radius:20px;
+margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LANDING -->
-<div class="hero" id="landing">
-  <h1>Letters For You ❤️</h1>
-  <h2>Honey & Shyam</h2>
-  <p>A story written in heartbeats.</p>
-  <button onclick="showPassword()">Begin</button>
+<!-- HOME PAGE -->
+<div class="page active" id="home">
+<div class="overlay"></div>
+<div class="home-content">
+<h1>Happy Valentine’s Day My Love ❤️</h1>
+<h2>Honey & Shyam</h2>
+<p>A story written in heartbeats 💓</p>
+<button onclick="nextPage('unlock')">Begin</button>
+</div>
 </div>
 
-<!-- PASSWORD -->
-<div class="page" id="passwordPage">
-  <div class="card">
-    <h2>Enter 4 Digit Code 💌</h2>
-    <input type="password" id="pass">
-    <button onclick="check()">Unlock</button>
-  </div>
+<!-- UNLOCK PAGE -->
+<div class="page" id="unlock">
+<div class="unlock-box">
+<h2>Enter 4 Digit Code 💌</h2>
+<input type="password" id="code" maxlength="4" placeholder="****">
+<button onclick="checkCode()">Unlock</button>
+</div>
 </div>
 
-<!-- PHOTO 1 -->
-<div class="page" id="photo1">
-  <h1>For My Love ❤️</h1>
-  <img src="photo1.jpg">
-  <p>This is where our beautiful journey began 💖</p>
-  <button onclick="next('photo2')">Next ➡</button>
+<!-- FOREVER US PAGE WITH 4 PHOTOS -->
+<div class="page" id="forever">
+<h1>Forever Us 💍</h1>
+<p>With you, forever doesn't feel long enough ❤️</p>
+
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+
+<button onclick="nextPage('letters')">Next ➡</button>
 </div>
 
-<!-- PHOTO 2 -->
-<div class="page" id="photo2">
-  <h1>Our Memory 💞</h1>
-  <img src="photo2.jpg">
-  <p>Every smile of yours makes my world brighter ✨</p>
-  <button onclick="next('photo3')">Next ➡</button>
-</div>
-
-<!-- PHOTO 3 -->
-<div class="page" id="photo3">
-  <h1>Forever Us 💍</h1>
-  <img src="photo3.jpg">
-  <p>With you, forever doesn't feel long enough ❤️</p>
-  <button onclick="next('letters')">Next ➡</button>
-</div>
-
-<!-- LETTERS -->
+<!-- LETTERS PAGE -->
 <div class="page" id="letters">
-  <h2>💌 Open When...</h2>
-  <div class="grid">
-    <div class="envelope" onclick="openModal('I am always here for you ❤️')">When you are sad</div>
-    <div class="envelope" onclick="openModal('Close your eyes and feel my hug 🤗')">When you miss me</div>
-    <div class="envelope" onclick="openModal('You are stronger than you think 💪')">When you feel insecure</div>
-    <div class="envelope" onclick="openModal('You will ace your exams, I believe in you 📚')">When exams stress you</div>
-  </div>
+<h1>💌 Open When...</h1>
 
-  <h2 style="margin-top:40px;">🎵 Our Song</h2>
-  <iframe style="border-radius:12px" 
-  src="https://open.spotify.com/embed/track/3hB9lDLyAClYVZivMMl20N"
-  width="90%" height="152" frameBorder="0" allowfullscreen=""
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-  </iframe>
-
-  <h2 style="margin-top:40px;">Will you be mine forever? 💍</h2>
-  <button onclick="celebrate()">YES ❤️</button>
-  <button>NO 😉</button>
+<div class="grid">
+<div class="card">When you are sad</div>
+<div class="card">When you miss me</div>
+<div class="card">When you feel insecure</div>
+<div class="card">When exams stress you</div>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <p id="modalText"></p>
-    <button onclick="closeModal()">Close</button>
-  </div>
+<button onclick="nextPage('song')">Next ➡</button>
+</div>
+
+<!-- SONG PAGE -->
+<div class="page" id="song">
+<h1>🎵 Our Song</h1>
+
+<div class="song-box">
+<h2>Co2</h2>
+<p>Prateek Kuhad</p>
+<a href="https://open.spotify.com" target="_blank">
+<button>Open in Spotify</button>
+</a>
+</div>
+
+<button onclick="nextPage('valentine')">Next ➡</button>
+</div>
+
+<!-- VALENTINE PAGE -->
+<div class="page" id="valentine">
+<h1>Will you be mine forever? 💍</h1>
+
+<div class="options">
+<button>YES ❤️</button>
+<button>NO 😉</button>
+</div>
 </div>
 
 <script>
-function showPassword(){
-  document.getElementById("landing").style.display="none";
-  document.getElementById("passwordPage").classList.add("active");
+function nextPage(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
-function check(){
-  if(document.getElementById("pass").value==="0825"){
-    next("photo1");
-  }else{
-    alert("Wrong Password 😅");
-  }
+function checkCode(){
+let userCode=document.getElementById('code').value;
+if(userCode==="1616"){ 
+nextPage('forever');
+}else{
+alert("Wrong Code ❤️");
 }
-
-function next(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-
-function openModal(text){
-  document.getElementById("modalText").innerText=text;
-  document.getElementById("modal").style.display="flex";
-}
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-function celebrate(){
-  for(let i=0;i<20;i++){
-    let heart=document.createElement("div");
-    heart.className="hearts";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.bottom="0px";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),2000);
-  }
 }
 </script>
 
