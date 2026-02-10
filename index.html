@@ -8,122 +8,182 @@
 <style>
 body{
   margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom,#f8cdd1,#f3aab4);
+  font-family:'Segoe UI',sans-serif;
+  overflow-x:hidden;
+  background:linear-gradient(-45deg,#ff758c,#ff7eb3,#fad0c4,#fbc2eb);
+  background-size:400% 400%;
+  animation:gradientBG 12s ease infinite;
   text-align:center;
+  color:#333;
 }
 
-/* LOCK SCREEN */
-#lockScreen{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+@keyframes gradientBG{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
-.lockCard{
-  background:#fff0f3;
+/* Floating hearts */
+.floating-heart{
+  position:fixed;
+  color:rgba(255,255,255,0.6);
+  animation:floatUp 8s linear infinite;
+  font-size:20px;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-100vh);}
+}
+
+.page{
+  display:none;
+  min-height:100vh;
+  padding:40px 20px;
+  animation:fadeIn 1s;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.active{display:block;}
+
+.card{
+  background:rgba(255,255,255,0.95);
   padding:30px;
-  border-radius:20px;
-  width:85%;
+  border-radius:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.3);
+  margin:auto;
   max-width:400px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
-
-input{
-  width:80%;
-  padding:15px;
-  font-size:18px;
-  border-radius:12px;
-  border:2px solid #ccc;
-  margin:15px 0;
-  text-align:center;
 }
 
 button{
-  padding:12px 25px;
+  padding:12px 30px;
   font-size:18px;
   border:none;
-  border-radius:25px;
-  background:#e75470;
+  border-radius:30px;
+  background:#e84363;
   color:white;
-  cursor:pointer;
-  margin-top:10px;
-}
-
-button:hover{
-  background:#d94362;
-}
-
-/* MAIN CONTENT */
-#mainContent{
-  display:none;
-  padding:20px;
-}
-
-img{
-  width:90%;
-  max-width:400px;
-  border-radius:20px;
-  margin:20px 0;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* ENVELOPE GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:20px;
-  margin:20px 10px;
-}
-
-.envelope{
-  background:linear-gradient(145deg,#ff6f91,#e75470);
-  padding:25px;
-  border-radius:20px;
-  color:white;
-  position:relative;
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  margin:15px;
   cursor:pointer;
   transition:0.3s;
 }
 
-.envelope:hover{
+button:hover{
   transform:scale(1.05);
+  background:#d63052;
+}
+
+input{
+  padding:12px;
+  font-size:18px;
+  border-radius:12px;
+  border:2px solid #ddd;
+}
+
+/* Photos */
+img{
+  width:90%;
+  max-width:400px;
+  border-radius:25px;
+  margin:20px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* Envelope Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:25px;
+}
+
+.envelope{
+  position:relative;
+  background:white;
+  border-radius:20px;
+  padding:50px 10px 20px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  overflow:hidden;
+  transition:0.4s;
+}
+
+.envelope:hover{
+  transform:translateY(-5px);
 }
 
 .envelope::before{
-  content:"✉️";
-  font-size:30px;
-  display:block;
-  margin-bottom:10px;
-}
-
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  bottom:0;
+  content:"";
+  position:absolute;
+  top:0;
   left:0;
   width:100%;
-  background:white;
-  padding:25px;
-  border-radius:25px 25px 0 0;
-  box-shadow:0 -5px 20px rgba(0,0,0,0.3);
+  height:50%;
+  background:#e84363;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transition:0.4s;
 }
 
-iframe{
-  margin-top:15px;
-  border-radius:12px;
+.envelope.open::before{
+  transform:rotateX(180deg);
+}
+
+.envelope span{
+  position:relative;
+  font-weight:bold;
+}
+
+/* Letter Popup */
+.letter{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#fff;
+  width:85%;
+  max-width:380px;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  display:none;
+  animation:fadeIn 0.5s;
+}
+
+/* Celebration hearts */
+.celebrate{
+  position:fixed;
+  color:red;
+  font-size:25px;
+  animation:burst 3s linear forwards;
+}
+
+@keyframes burst{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-800px);opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOCK SCREEN -->
-<div id="lockScreen">
-  <div class="lockCard">
+<!-- Floating background hearts -->
+<script>
+for(let i=0;i<15;i++){
+  let h=document.createElement("div");
+  h.className="floating-heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(h);
+}
+</script>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
     <h2>Enter 4 Digit Code 💌</h2>
     <input type="password" id="pass" maxlength="4">
     <br>
@@ -131,76 +191,95 @@ iframe{
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
-<div id="mainContent">
-
+<!-- PAGE 2 -->
+<div class="page" id="page2">
   <h1>For My Love ❤️</h1>
-
   <img src="photo1.jpg">
   <img src="photo2.jpg">
-
-  <h2>Open When 💖</h2>
-
-  <div class="grid">
-    <div class="envelope" onclick="showMessage('Even on your worst days, I am always here for you ❤️')">
-      When you are sad
-    </div>
-
-    <div class="envelope" onclick="showMessage('No matter the distance, my heart is always with you 💕')">
-      When you miss me
-    </div>
-
-    <div class="envelope" onclick="showMessage('You are beautiful, strong and enough. Always remember that ❤️')">
-      When you feel insecure
-    </div>
-
-    <div class="envelope" onclick="showMessage('You will do amazing. I believe in you more than anyone 🥰')">
-      When exams stress you
-    </div>
-  </div>
-
-  <h2>🎵 Our Song</h2>
-
-  <iframe 
-    src="https://open.spotify.com/embed/track/3hB9lDLyAClYVZivMMl20N"
-    width="90%" height="152"
-    frameBorder="0"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-  </iframe>
-
-  <h2 style="margin-top:30px;">Will you be mine forever? 💍</h2>
-
-  <button onclick="alert('She Said YES 💍❤️')">YES ❤️</button>
-  <button onclick="alert('Still YES 😌❤️')">NO 😉</button>
-
+  <br>
+  <button onclick="nextPage(3)">Next ➡</button>
 </div>
 
-<!-- LETTER MODAL -->
-<div id="letterModal" class="modal">
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h2>Open When 💖</h2>
+  <div class="grid">
+    <div class="envelope" onclick="openLetter(this,'Even on your worst days, I am always here for you ❤️')">
+      <span>When you are sad</span>
+    </div>
+    <div class="envelope" onclick="openLetter(this,'I miss you every second we are apart 💕')">
+      <span>When you miss me</span>
+    </div>
+    <div class="envelope" onclick="openLetter(this,'You are beautiful and more than enough ❤️')">
+      <span>When you feel insecure</span>
+    </div>
+    <div class="envelope" onclick="openLetter(this,'You will ace everything. I believe in you 🥰')">
+      <span>When exams stress you</span>
+    </div>
+  </div>
+  <button onclick="nextPage(4)">Next ➡</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h2>🎵 Our Song</h2>
+  <iframe style="border-radius:12px"
+    src="https://open.spotify.com/embed/track/3hB9lDLyAClYVZivMMl20N"
+    width="90%" height="152" frameBorder="0"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+  </iframe>
+  <br>
+  <button onclick="nextPage(5)">Next ➡</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+  <h2>Will you be mine forever? 💍</h2>
+  <button onclick="celebrate()">YES ❤️</button>
+  <button onclick="alert('Still YES 😌❤️')">NO 😉</button>
+</div>
+
+<!-- LETTER POPUP -->
+<div class="letter" id="letterBox">
   <p id="letterText"></p>
-  <button onclick="closeMessage()">Close 💕</button>
+  <button onclick="closeLetter()">Close 💕</button>
 </div>
 
 <script>
 function unlock(){
-  var password = "2025";   // CHANGE PASSWORD HERE
-  var entered = document.getElementById("pass").value;
-
-  if(entered === password){
-    document.getElementById("lockScreen").style.display="none";
-    document.getElementById("mainContent").style.display="block";
-  } else {
+  if(document.getElementById("pass").value==="0825"){
+    nextPage(2);
+  }else{
     alert("Wrong Code 😜");
   }
 }
 
-function showMessage(text){
-  document.getElementById("letterText").innerText=text;
-  document.getElementById("letterModal").style.display="block";
+function nextPage(num){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page"+num).classList.add("active");
+  window.scrollTo(0,0);
 }
 
-function closeMessage(){
-  document.getElementById("letterModal").style.display="none";
+function openLetter(el,text){
+  el.classList.add("open");
+  document.getElementById("letterText").innerText=text;
+  document.getElementById("letterBox").style.display="block";
+}
+
+function closeLetter(){
+  document.getElementById("letterBox").style.display="none";
+}
+
+function celebrate(){
+  for(let i=0;i<50;i++){
+    let heart=document.createElement("div");
+    heart.className="celebrate";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.top="100vh";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),3000);
+  }
 }
 </script>
 
