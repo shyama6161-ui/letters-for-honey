@@ -12,14 +12,14 @@ body{
 height:100vh;
 overflow:hidden;
 background:linear-gradient(135deg,#f8cdda,#f6a4a4);
+position:relative;
 }
 
-/* Floating hearts */
+/* Floating Hearts */
 .heart{
 position:absolute;
 bottom:-20px;
 font-size:18px;
-color:#ff4d6d;
 animation:float 6s linear infinite;
 }
 @keyframes float{
@@ -61,7 +61,6 @@ width:85%;
 max-width:330px;
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
-
 input{
 width:100%;
 padding:12px;
@@ -71,7 +70,7 @@ margin:15px 0;
 text-align:center;
 }
 
-/* Photo */
+/* Photos */
 .photo{
 width:230px;
 border-radius:20px;
@@ -85,7 +84,6 @@ grid-template-columns:1fr 1fr;
 gap:15px;
 margin-top:20px;
 }
-
 .card{
 background:#ff6f91;
 color:white;
@@ -93,33 +91,43 @@ padding:20px;
 border-radius:18px;
 cursor:pointer;
 transition:0.3s;
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
 }
-.card:hover{
-transform:scale(1.05);
-}
+.card:hover{transform:scale(1.05);}
 
-/* Letter popup */
+/* Popup */
 .popup{
-position:absolute;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+display:none;
+justify-content:center;
+align-items:center;
+}
+.popup-box{
 background:white;
 padding:25px;
 border-radius:20px;
 width:80%;
-max-width:300px;
-display:none;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
+max-width:320px;
+text-align:center;
 }
 
+/* Song */
 .song{
 background:#8b0000;
 color:white;
 padding:25px;
 border-radius:20px;
 width:85%;
-max-width:320px;
+max-width:350px;
 margin-top:20px;
 }
 
+/* Valentine */
 .options{
 display:flex;
 gap:20px;
@@ -180,19 +188,21 @@ position:relative;
 <div class="page" id="letters">
 <h2>💌 Open When...</h2>
 <div class="grid">
-<div class="card" onclick="openLetter('l1')">When you are sad</div>
-<div class="card" onclick="openLetter('l2')">When you miss me</div>
-<div class="card" onclick="openLetter('l3')">When you feel insecure</div>
-<div class="card" onclick="openLetter('l4')">When exams stress you</div>
+<div class="card" onclick="openLetter('l1')">📩 When you are sad</div>
+<div class="card" onclick="openLetter('l2')">📩 When you miss me</div>
+<div class="card" onclick="openLetter('l3')">📩 When you feel insecure</div>
+<div class="card" onclick="openLetter('l4')">📩 When exams stress you</div>
 </div>
 <button onclick="go('song')">Next ➡</button>
 </div>
 
-<!-- LETTER POPUPS -->
-<div class="popup" id="l1">No matter what happens, I am always with you ❤️<br><br><button onclick="closePop()">Close</button></div>
-<div class="popup" id="l2">Even when we are apart, my heart stays with you 💕<br><br><button onclick="closePop()">Close</button></div>
-<div class="popup" id="l3">You are perfect just the way you are 💖<br><br><button onclick="closePop()">Close</button></div>
-<div class="popup" id="l4">You are strong and you will shine always ✨<br><br><button onclick="closePop()">Close</button></div>
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-box">
+<p id="popupText"></p>
+<button onclick="closePop()">Close</button>
+</div>
+</div>
 
 <!-- SONG -->
 <div class="page" id="song">
@@ -200,8 +210,8 @@ position:relative;
 <div class="song">
 <h3>Co2</h3>
 <p>Prateek Kuhad</p>
-<a href="https://open.spotify.com" target="_blank">
-<button>Open in Spotify</button>
+<a href="https://open.spotify.com/track/3hB9lDLyAClYVZivMMl20N?si=TcA9oF8NSIugpM5-H03Niw" target="_blank">
+<button>Play on Spotify 🎶</button>
 </a>
 </div>
 <button onclick="go('valentine')">Next ➡</button>
@@ -223,6 +233,7 @@ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
+/* Unlock code = 0825 */
 function check(){
 if(document.getElementById("code").value==="0825"){
 go("p1");
@@ -231,19 +242,24 @@ alert("Wrong Code ❤️");
 }
 }
 
+function openLetter(type){
+let text="";
+if(type==="l1") text="No matter what happens, I am always with you ❤️";
+if(type==="l2") text="Even when we are apart, my heart stays with you 💕";
+if(type==="l3") text="You are perfect just the way you are 💖";
+if(type==="l4") text="You are strong and you will shine always ✨";
+document.getElementById("popupText").innerText=text;
+document.getElementById("popup").style.display="flex";
+}
+function closePop(){
+document.getElementById("popup").style.display="none";
+}
+
 function move(){
 let btn=document.getElementById("no");
 btn.style.position="absolute";
 btn.style.left=Math.random()*200+"px";
 btn.style.top=Math.random()*200+"px";
-}
-
-function openLetter(id){
-document.getElementById(id).style.display="block";
-}
-
-function closePop(){
-document.querySelectorAll('.popup').forEach(p=>p.style.display="none");
 }
 
 /* Floating hearts */
