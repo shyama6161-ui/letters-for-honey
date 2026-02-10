@@ -3,211 +3,289 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Honey ❤️</title>
+<title>Honey ❤️ Shyam</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{
-font-family:'Poppins',sans-serif;
 overflow:hidden;
-background:black;
+background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);
 color:white;
+height:100vh;
 }
 
-/* SLIDER */
-.slider{
-display:flex;
-width:600%;
-height:100vh;
-transition:1s cubic-bezier(.77,0,.18,1);
+/* Floating Hearts */
+.heart-bg{
+position:fixed;
+bottom:-20px;
+font-size:18px;
+animation:float 10s linear infinite;
+opacity:0.4;
+}
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-120vh);}
 }
 
-/* EACH SLIDE */
-.slide{
-width:100vw;
+.page{
+display:none;
+position:absolute;
 height:100vh;
-flex-shrink:0;
-display:flex;
-flex-direction:column;
+width:100%;
+top:0;
+left:0;
 justify-content:center;
 align-items:center;
+flex-direction:column;
 text-align:center;
-padding:40px;
+padding:25px;
+animation:fade 0.6s ease;
+}
+.page.active{display:flex;}
+
+@keyframes fade{
+from{opacity:0; transform:scale(0.98);}
+to{opacity:1; transform:scale(1);}
 }
 
-/* BACKGROUNDS */
-.bg1{
-background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url("https://images.unsplash.com/photo-1519681393784-d120267933ba");
-background-size:cover;
-background-position:center;
-}
-
-.bg2{background:#5a1f3d;}
-.bg3{background:#141e30;}
-.bg4{background:#111;}
-.bg5{background:#3d1428;}
-.bg6{background:#000;}
-
-/* BUTTON */
-button{
-padding:15px 35px;
-border:none;
-border-radius:40px;
-background:#ff4f81;
-color:white;
-font-size:18px;
-cursor:pointer;
-margin-top:40px;
-transition:.3s;
-box-shadow:0 0 20px rgba(255,79,129,.6);
-}
-button:hover{
-transform:scale(1.1);
-box-shadow:0 0 40px rgba(255,79,129,1);
-}
-
-/* ENVELOPE */
-.envelope{
-width:160px;
-height:100px;
-background:#ff4f81;
-position:relative;
-margin:40px;
-cursor:pointer;
-transition:.6s;
-}
-.envelope:before{
-content:'';
-position:absolute;
-top:-50px;
-left:0;
-border-left:80px solid transparent;
-border-right:80px solid transparent;
-border-bottom:50px solid #ff4f81;
-}
-.opened{transform:rotateX(180deg);}
-
-.hidden{display:none;}
+h1{margin-bottom:20px;font-size:26px;}
+.names{font-family:'Dancing Script',cursive;font-size:28px;margin-bottom:20px;}
 
 input{
 padding:12px;
-border-radius:30px;
+border-radius:25px;
 border:none;
 text-align:center;
-margin-top:20px;
+font-size:16px;
+margin-top:15px;
 }
 
-h1{font-size:42px;margin-bottom:20px;}
-h2{margin-bottom:10px;}
-p{max-width:400px;line-height:1.6;}
+button{
+margin-top:25px;
+padding:12px 35px;
+border:none;
+border-radius:30px;
+background:#ff4e88;
+color:white;
+font-size:16px;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,0,120,0.6);
+transition:0.3s;
+}
+button:hover{transform:scale(1.1);}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:25px;
+max-width:400px;
+}
+
+.envelope-box{
+display:flex;
+flex-direction:column;
+align-items:center;
+cursor:pointer;
+}
+
+.envelope{
+width:150px;
+height:110px;
+background:linear-gradient(145deg,#ff4e88,#b31255);
+border-radius:8px;
+position:relative;
+box-shadow:0 10px 30px rgba(255,0,120,0.4);
+transition:0.4s;
+}
+.envelope:hover{transform:scale(1.08);}
+.envelope::after{
+content:"";
+width:35px;height:35px;
+background:#5a0f25;
+border-radius:50%;
+position:absolute;
+top:50%;left:50%;
+transform:translate(-50%,-50%);
+box-shadow:inset 0 0 8px rgba(0,0,0,0.6);
+}
+
+.long-message{
+max-width:500px;
+line-height:1.6;
+font-size:15px;
+}
+
+.signature{
+margin-top:20px;
+font-family:'Dancing Script',cursive;
+font-size:22px;
+animation:fade 2s ease;
+}
+
+.no-btn{
+background:#444;
+position:absolute;
+}
+
+.confetti{
+position:fixed;
+width:8px;height:8px;
+top:0;
+animation:fall 3s linear forwards;
+}
+@keyframes fall{
+to{transform:translateY(100vh) rotate(720deg);}
+}
 </style>
 </head>
 
 <body>
 
-<div class="slider" id="slider">
+<!-- Floating Hearts -->
+<script>
+for(let i=0;i<25;i++){
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.className="heart-bg";
+heart.style.left=Math.random()*100+"%";
+heart.style.animationDuration=(6+Math.random()*6)+"s";
+document.body.appendChild(heart);
+}
+</script>
 
-<!-- PASSWORD -->
-<div class="slide bg1">
-<h1>Only For Honey 💖</h1>
-<p>Enter our special date</p>
-<input type="password" id="pass">
-<button onclick="unlock()">Unlock</button>
-<p id="error" style="color:pink;margin-top:10px;"></p>
+<!-- Background Romantic Instrumental -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f2b9c7e2.mp3?filename=romantic-background-11266.mp3" type="audio/mp3">
+</audio>
+
+<!-- PASSWORD PAGE -->
+<div class="page active" id="lock">
+<h1>Enter Our Special Date 💕</h1>
+<input type="password" id="password" placeholder="Enter Password">
+<button onclick="checkPassword()">Unlock</button>
+<p id="error" style="color:#ff6b81;margin-top:10px;"></p>
 </div>
 
-<!-- LANDING -->
-<div class="slide bg1">
-<h1>Letters For You ❤️</h1>
-<h2>Honey & Shyam</h2>
-<p>A story written in heartbeats.</p>
-<button onclick="nextSlide()">Begin</button>
+<!-- WELCOME PAGE -->
+<div class="page" id="welcome">
+<div class="names">Honey ❤️ Shyam</div>
+<h1>A Love Written In Heartbeats</h1>
+<button onclick="openPage('home')">Begin</button>
 </div>
 
-<!-- OPEN WHEN -->
-<div class="slide bg2">
+<!-- HOME -->
+<div class="page" id="home">
 <h1>💌 Open When...</h1>
-<div class="envelope" onclick="openEnvelope(this)"></div>
-<p id="letters" class="hidden">
-When you are sad → I’m always with you.<br><br>
-When you miss me → Feel my hug 🤗<br><br>
-When insecure → You are more than enough.<br><br>
-When exams stress you → Future doctor energy 😌
-</p>
-<button onclick="nextSlide()">Next</button>
+<div class="grid">
+
+<div class="envelope-box" onclick="openPage('sad')">
+<div class="envelope"></div>
+<div>When you are sad</div>
 </div>
 
-<!-- EVERYTHING -->
-<div class="slide bg3">
-<h1>💖 Everything I Love About You</h1>
-<p>
-Your smile ❤️<br>
-Your eyes ✨<br>
-Your hugs 🤗<br>
-Your voice 🎶<br>
-The way you say Shyam 💕
-</p>
-<button onclick="nextSlide()">Next</button>
+<div class="envelope-box" onclick="openPage('miss')">
+<div class="envelope"></div>
+<div>When you miss me</div>
 </div>
 
-<!-- SONG -->
-<div class="slide bg4">
-<h1>🎵 Our Song – CO2</h1>
-
-<iframe style="border-radius:12px" 
-src="https://open.spotify.com/embed/track/3hB9lDLyAClYVZivMMl20N"
-width="320" height="180"
-frameBorder="0"
-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-</iframe>
-
-<button onclick="nextSlide()">Next</button>
+<div class="envelope-box" onclick="openPage('insecure')">
+<div class="envelope"></div>
+<div>When you feel insecure</div>
 </div>
 
-<!-- LETTER -->
-<div class="slide bg5">
-<h1>💌 The Sweet Letter</h1>
-<p id="typewriter"></p>
-<button onclick="nextSlide()">Finish</button>
+<div class="envelope-box" onclick="openPage('exam')">
+<div class="envelope"></div>
+<div>When exams stress you</div>
 </div>
 
+</div>
+</div>
+
+<!-- LETTERS -->
+<div class="page" id="sad">
+<h1>When You Are Sad 🤍</h1>
+<p>No matter what happens, I am always with you.</p>
+<button onclick="openPage('home')">Back</button>
+</div>
+
+<div class="page" id="miss">
+<h1>When You Miss Me 🫶</h1>
+<p>Close your eyes and feel my hug.</p>
+<button onclick="openPage('home')">Back</button>
+</div>
+
+<div class="page" id="insecure">
+<h1>When You Feel Insecure ✨</h1>
+<p>You are more than enough. You are my peace.</p>
+<button onclick="openPage('home')">Back</button>
+</div>
+
+<div class="page" id="exam">
+<h1>When Exams Stress You 🩺</h1>
+<p>Future doctor energy. I believe in you always.</p>
+<button onclick="openPage('message')">Next</button>
+</div>
+
+<!-- LONG DISTANCE MESSAGE -->
+<div class="page" id="message">
+<h1>For My Love ❤️</h1>
+<div class="long-message">
+Even if miles separate us, our souls have never been apart.
+Distance is only geography — never the heart.
+
+You are mine.
+And I am yours.
+Forever.
+
+Happy Valentine’s Day, my love.
+No matter how far we are,
+we are meant to be together —
+today, tomorrow, and always.
+</div>
+<div class="signature">Forever Yours, Shyam ❤️</div>
+<button onclick="openPage('valentine')">Next</button>
+</div>
+
+<!-- VALENTINE PAGE -->
+<div class="page" id="valentine">
+<h1>Will You Be My Valentine? ❤️</h1>
+<button onclick="celebrate()">YES 💍</button>
+<button class="no-btn" id="noBtn">NO 😏</button>
 </div>
 
 <script>
-let current=0;
-function nextSlide(){
-current++;
-document.getElementById("slider").style.transform="translateX(-"+current*100+"vw)";
+function openPage(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
-function unlock(){
-if(document.getElementById("pass").value==="0825"){
-nextSlide();
+function checkPassword(){
+let pass=document.getElementById("password").value;
+if(pass==="0825"){
+openPage("welcome");
 }else{
-document.getElementById("error").innerText="Wrong password 💔";
+document.getElementById("error").innerText="Wrong password ❤️ Try again.";
 }
 }
 
-function openEnvelope(el){
-el.classList.add("opened");
-document.getElementById("letters").classList.remove("hidden");
+function celebrate(){
+for(let i=0;i<120;i++){
+let conf=document.createElement("div");
+conf.className="confetti";
+conf.style.left=Math.random()*100+"%";
+conf.style.background="hsl("+Math.random()*360+"deg,100%,50%)";
+document.body.appendChild(conf);
+}
+alert("She said YES ❤️🥹✨");
 }
 
-/* TYPEWRITER */
-var text="Honey,\n\nIf I could love you for one more day, I would choose forever.\n\nYou are my calm, my strength, my happiness in everything.\n\nForever yours,\nShyam ❤️";
-var i=0;
-function typeWriter(){
-if(i<text.length){
-document.getElementById("typewriter").innerHTML+=text.charAt(i);
-i++;
-setTimeout(typeWriter,40);
-}
-}
-setTimeout(typeWriter,5000);
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+noBtn.style.top=Math.random()*70+"%";
+noBtn.style.left=Math.random()*70+"%";
+});
 </script>
 
 </body>
