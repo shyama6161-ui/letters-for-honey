@@ -6,19 +6,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
 height:100vh;
-width:100vw;
 overflow:hidden;
 background:linear-gradient(135deg,#f8cdda,#f6a4a4);
-position:relative;
 }
 
 /* Floating hearts */
@@ -29,7 +22,6 @@ font-size:18px;
 color:#ff4d6d;
 animation:float 6s linear infinite;
 }
-
 @keyframes float{
 0%{transform:translateY(0);}
 100%{transform:translateY(-110vh);}
@@ -38,8 +30,8 @@ animation:float 6s linear infinite;
 /* Pages */
 .page{
 position:absolute;
+width:100%;
 height:100vh;
-width:100vw;
 display:none;
 flex-direction:column;
 justify-content:center;
@@ -47,12 +39,8 @@ align-items:center;
 text-align:center;
 padding:20px;
 }
+.active{display:flex;}
 
-.active{
-display:flex;
-}
-
-/* Buttons */
 button{
 background:#ff4d6d;
 color:white;
@@ -81,19 +69,13 @@ border-radius:12px;
 border:1px solid #ccc;
 margin:15px 0;
 text-align:center;
-font-size:16px;
 }
 
-/* Photos */
+/* Photo */
 .photo{
-width:220px;
-border-radius:18px;
-margin-top:10px;
-}
-
-.caption{
-font-size:14px;
-margin-bottom:10px;
+width:230px;
+border-radius:20px;
+margin-bottom:15px;
 }
 
 /* Letters */
@@ -109,9 +91,25 @@ background:#ff6f91;
 color:white;
 padding:20px;
 border-radius:18px;
+cursor:pointer;
+transition:0.3s;
+}
+.card:hover{
+transform:scale(1.05);
 }
 
-/* Song */
+/* Letter popup */
+.popup{
+position:absolute;
+background:white;
+padding:25px;
+border-radius:20px;
+width:80%;
+max-width:300px;
+display:none;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
 .song{
 background:#8b0000;
 color:white;
@@ -122,7 +120,6 @@ max-width:320px;
 margin-top:20px;
 }
 
-/* Valentine */
 .options{
 display:flex;
 gap:20px;
@@ -151,22 +148,31 @@ position:relative;
 </div>
 </div>
 
-<!-- PHOTOS -->
-<div class="page" id="photos">
-<h2>Forever Us 💍</h2>
-
+<!-- PHOTO 1 -->
+<div class="page" id="p1">
 <img src="photo1.jpg" class="photo">
-<p class="caption">Our beginning ❤️</p>
+<p>Our beginning ❤️</p>
+<button onclick="go('p2')">Next ➡</button>
+</div>
 
+<!-- PHOTO 2 -->
+<div class="page" id="p2">
 <img src="photo2.jpg" class="photo">
-<p class="caption">Your smile is my world 💕</p>
+<p>Your smile is my world 💕</p>
+<button onclick="go('p3')">Next ➡</button>
+</div>
 
+<!-- PHOTO 3 -->
+<div class="page" id="p3">
 <img src="photo3.jpg" class="photo">
-<p class="caption">Memories forever ✨</p>
+<p>Memories forever ✨</p>
+<button onclick="go('p4')">Next ➡</button>
+</div>
 
+<!-- PHOTO 4 -->
+<div class="page" id="p4">
 <img src="photo4.jpg" class="photo">
-<p class="caption">You & Me always 💖</p>
-
+<p>You & Me always 💖</p>
 <button onclick="go('letters')">Next ➡</button>
 </div>
 
@@ -174,13 +180,19 @@ position:relative;
 <div class="page" id="letters">
 <h2>💌 Open When...</h2>
 <div class="grid">
-<div class="card">When you are sad</div>
-<div class="card">When you miss me</div>
-<div class="card">When you feel insecure</div>
-<div class="card">When exams stress you</div>
+<div class="card" onclick="openLetter('l1')">When you are sad</div>
+<div class="card" onclick="openLetter('l2')">When you miss me</div>
+<div class="card" onclick="openLetter('l3')">When you feel insecure</div>
+<div class="card" onclick="openLetter('l4')">When exams stress you</div>
 </div>
 <button onclick="go('song')">Next ➡</button>
 </div>
+
+<!-- LETTER POPUPS -->
+<div class="popup" id="l1">No matter what happens, I am always with you ❤️<br><br><button onclick="closePop()">Close</button></div>
+<div class="popup" id="l2">Even when we are apart, my heart stays with you 💕<br><br><button onclick="closePop()">Close</button></div>
+<div class="popup" id="l3">You are perfect just the way you are 💖<br><br><button onclick="closePop()">Close</button></div>
+<div class="popup" id="l4">You are strong and you will shine always ✨<br><br><button onclick="closePop()">Close</button></div>
 
 <!-- SONG -->
 <div class="page" id="song">
@@ -199,39 +211,39 @@ position:relative;
 <div class="page" id="valentine">
 <h2>Will you be mine forever? 💍</h2>
 <div class="options">
-<button onclick="yes()">YES ❤️</button>
+<button onclick="alert('I love you forever ❤️')">YES ❤️</button>
 <button id="no" onmouseover="move()">NO 😉</button>
 </div>
 </div>
 
 <script>
 
-/* Page switch */
 function go(id){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-/* Code check */
 function check(){
-if(document.getElementById("code").value==="1616"){
-go("photos");
+if(document.getElementById("code").value==="0825"){
+go("p1");
 }else{
 alert("Wrong Code ❤️");
 }
 }
 
-/* YES */
-function yes(){
-alert("I love you forever Honey 💍❤️");
-}
-
-/* NO runs */
 function move(){
 let btn=document.getElementById("no");
 btn.style.position="absolute";
 btn.style.left=Math.random()*200+"px";
 btn.style.top=Math.random()*200+"px";
+}
+
+function openLetter(id){
+document.getElementById(id).style.display="block";
+}
+
+function closePop(){
+document.querySelectorAll('.popup').forEach(p=>p.style.display="none");
 }
 
 /* Floating hearts */
@@ -242,7 +254,7 @@ h.innerHTML="❤️";
 h.style.left=Math.random()*100+"vw";
 document.body.appendChild(h);
 setTimeout(()=>{h.remove();},6000);
-},500);
+},600);
 
 </script>
 
