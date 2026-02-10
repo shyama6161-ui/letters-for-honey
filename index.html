@@ -5,287 +5,231 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Honey ❤️ Shyam</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box}
 body{
+font-family:'Poppins',sans-serif;
 overflow:hidden;
-background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
-height:100vh;
-}
-
-/* Floating Hearts */
-.heart-bg{
-position:fixed;
-bottom:-20px;
-font-size:18px;
-animation:float 10s linear infinite;
-opacity:0.4;
-}
-@keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-120vh);}
 }
 
 .page{
-display:none;
 position:absolute;
-height:100vh;
 width:100%;
-top:0;
-left:0;
+height:100vh;
+display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 text-align:center;
-padding:25px;
-animation:fade 0.6s ease;
-}
-.page.active{display:flex;}
-
-@keyframes fade{
-from{opacity:0; transform:scale(0.98);}
-to{opacity:1; transform:scale(1);}
+padding:30px;
+transition:0.8s ease;
+opacity:0;
+pointer-events:none;
 }
 
-h1{margin-bottom:20px;font-size:26px;}
-.names{font-family:'Dancing Script',cursive;font-size:28px;margin-bottom:20px;}
-
-input{
-padding:12px;
-border-radius:25px;
-border:none;
-text-align:center;
-font-size:16px;
-margin-top:15px;
+.page.active{
+opacity:1;
+pointer-events:auto;
 }
+
+.glass{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,105,180,0.4);
+max-width:500px;
+}
+
+h1{font-size:30px;margin-bottom:20px}
+p{font-size:16px;margin-bottom:20px;line-height:1.6}
 
 button{
-margin-top:25px;
-padding:12px 35px;
+padding:14px 30px;
 border:none;
 border-radius:30px;
-background:#ff4e88;
+background:#ff4f81;
 color:white;
 font-size:16px;
 cursor:pointer;
-box-shadow:0 0 20px rgba(255,0,120,0.6);
-transition:0.3s;
+margin-top:20px;
+box-shadow:0 0 20px rgba(255,79,129,.7);
 }
-button:hover{transform:scale(1.1);}
+
+button:hover{transform:scale(1.05)}
+
+input{
+padding:12px;
+border-radius:20px;
+border:none;
+text-align:center;
+font-size:16px;
+margin-top:20px;
+}
+
+.seal{
+width:80px;
+height:80px;
+border-radius:50%;
+background:linear-gradient(145deg,#7a001f,#b3003c);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+margin-bottom:15px;
+box-shadow:0 0 25px rgba(255,0,85,.9);
+}
 
 .grid{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:25px;
-max-width:400px;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
-.envelope-box{
-display:flex;
-flex-direction:column;
-align-items:center;
-cursor:pointer;
+.card{
+background:linear-gradient(145deg,#ff4f81,#ff6f9c);
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,79,129,.6);
 }
 
-.envelope{
-width:150px;
-height:110px;
-background:linear-gradient(145deg,#ff4e88,#b31255);
-border-radius:8px;
-position:relative;
-box-shadow:0 10px 30px rgba(255,0,120,0.4);
-transition:0.4s;
-}
-.envelope:hover{transform:scale(1.08);}
-.envelope::after{
-content:"";
-width:35px;height:35px;
-background:#5a0f25;
-border-radius:50%;
-position:absolute;
-top:50%;left:50%;
-transform:translate(-50%,-50%);
-box-shadow:inset 0 0 8px rgba(0,0,0,0.6);
-}
-
-.long-message{
-max-width:500px;
-line-height:1.6;
-font-size:15px;
+img.memory{
+width:220px;
+border-radius:20px;
+margin-top:15px;
+box-shadow:0 0 40px rgba(255,105,180,.6);
 }
 
 .signature{
-margin-top:20px;
 font-family:'Dancing Script',cursive;
-font-size:22px;
-animation:fade 2s ease;
+font-size:26px;
+margin-top:15px;
 }
 
-.no-btn{
-background:#444;
+iframe{
+margin-top:20px;
+border-radius:12px;
+}
+
+.hearts{
 position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
 }
 
-.confetti{
-position:fixed;
-width:8px;height:8px;
-top:0;
-animation:fall 3s linear forwards;
+.hearts span{
+position:absolute;
+color:#ff4f81;
+animation:float 6s linear infinite;
+font-size:20px;
 }
-@keyframes fall{
-to{transform:translateY(100vh) rotate(720deg);}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
 }
 </style>
 </head>
-
 <body>
 
-<!-- Floating Hearts -->
-<script>
-for(let i=0;i<25;i++){
-let heart=document.createElement("div");
-heart.innerHTML="❤️";
-heart.className="heart-bg";
-heart.style.left=Math.random()*100+"%";
-heart.style.animationDuration=(6+Math.random()*6)+"s";
-document.body.appendChild(heart);
-}
-</script>
-
-<!-- Background Romantic Instrumental -->
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f2b9c7e2.mp3?filename=romantic-background-11266.mp3" type="audio/mp3">
-</audio>
+<div class="hearts" id="hearts"></div>
 
 <!-- PASSWORD PAGE -->
-<div class="page active" id="lock">
-<h1>Enter Our Special Date 💕</h1>
-<input type="password" id="password" placeholder="Enter Password">
-<button onclick="checkPassword()">Unlock</button>
-<p id="error" style="color:#ff6b81;margin-top:10px;"></p>
+<div class="page active" id="page0">
+<h1>Enter Password ❤️</h1>
+<input type="password" id="pass" placeholder="Enter 4 digit code">
+<button onclick="checkPass()">Unlock</button>
 </div>
 
-<!-- WELCOME PAGE -->
-<div class="page" id="welcome">
-<div class="names">Honey ❤️ Shyam</div>
-<h1>A Love Written In Heartbeats</h1>
-<button onclick="openPage('home')">Begin</button>
-</div>
-
-<!-- HOME -->
-<div class="page" id="home">
-<h1>💌 Open When...</h1>
-<div class="grid">
-
-<div class="envelope-box" onclick="openPage('sad')">
-<div class="envelope"></div>
-<div>When you are sad</div>
-</div>
-
-<div class="envelope-box" onclick="openPage('miss')">
-<div class="envelope"></div>
-<div>When you miss me</div>
-</div>
-
-<div class="envelope-box" onclick="openPage('insecure')">
-<div class="envelope"></div>
-<div>When you feel insecure</div>
-</div>
-
-<div class="envelope-box" onclick="openPage('exam')">
-<div class="envelope"></div>
-<div>When exams stress you</div>
-</div>
-
-</div>
-</div>
-
-<!-- LETTERS -->
-<div class="page" id="sad">
-<h1>When You Are Sad 🤍</h1>
-<p>No matter what happens, I am always with you.</p>
-<button onclick="openPage('home')">Back</button>
-</div>
-
-<div class="page" id="miss">
-<h1>When You Miss Me 🫶</h1>
-<p>Close your eyes and feel my hug.</p>
-<button onclick="openPage('home')">Back</button>
-</div>
-
-<div class="page" id="insecure">
-<h1>When You Feel Insecure ✨</h1>
-<p>You are more than enough. You are my peace.</p>
-<button onclick="openPage('home')">Back</button>
-</div>
-
-<div class="page" id="exam">
-<h1>When Exams Stress You 🩺</h1>
-<p>Future doctor energy. I believe in you always.</p>
-<button onclick="openPage('message')">Next</button>
-</div>
-
-<!-- LONG DISTANCE MESSAGE -->
-<div class="page" id="message">
+<!-- INTRO -->
+<div class="page" id="page1">
+<div class="glass">
 <h1>For My Love ❤️</h1>
-<div class="long-message">
-Even if miles separate us, our souls have never been apart.
-Distance is only geography — never the heart.
-
-You are mine.
-And I am yours.
-Forever.
-
-Happy Valentine’s Day, my love.
-No matter how far we are,
-we are meant to be together —
-today, tomorrow, and always.
+<p>Even if miles separate us, our souls have never been apart. Distance is only geography — never the heart.</p>
+<p>You are mine. And I am yours. Forever.</p>
+<p>Happy Valentine’s Day my love 💌</p>
+<img src="photo1.jpg" class="memory">
+<button onclick="next(2)">Next</button>
 </div>
-<div class="signature">Forever Yours, Shyam ❤️</div>
-<button onclick="openPage('valentine')">Next</button>
 </div>
 
-<!-- VALENTINE PAGE -->
-<div class="page" id="valentine">
-<h1>Will You Be My Valentine? ❤️</h1>
-<button onclick="celebrate()">YES 💍</button>
-<button class="no-btn" id="noBtn">NO 😏</button>
+<!-- OPEN WHEN -->
+<div class="page" id="page2">
+<div class="glass">
+<h1>Open When 💌</h1>
+<div class="grid">
+<div class="card"><div class="seal">❤️</div>When you are sad</div>
+<div class="card"><div class="seal">❤️</div>When you miss me</div>
+<div class="card"><div class="seal">❤️</div>When you feel insecure</div>
+<div class="card"><div class="seal">❤️</div>When exams stress you</div>
+</div>
+<button onclick="next(3)">Next</button>
+</div>
+</div>
+
+<!-- LOVE MESSAGE -->
+<div class="page" id="page3">
+<div class="glass">
+<h1>My Promise 💖</h1>
+<p>No matter how far we are, we are meant to be together — today, tomorrow, and always.</p>
+<p>Long distance cannot break what destiny has written.</p>
+<img src="photo2.jpg" class="memory">
+<p class="signature">Forever Yours, Shyam ❤️</p>
+<button onclick="next(4)">Next</button>
+</div>
+</div>
+
+<!-- SONG PAGE -->
+<div class="page" id="page4">
+<div class="glass">
+<h1>Our Song 🎵</h1>
+<iframe src="https://open.spotify.com/embed/track/3hB9lDLyAClYVZivMMl20N"
+width="300" height="80" frameborder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<button onclick="next(5)">Next</button>
+</div>
+</div>
+
+<!-- VALENTINE QUESTION -->
+<div class="page" id="page5">
+<div class="glass">
+<h1>Will You Be My Valentine? 💍</h1>
+<button onclick="yesLove()">YES ❤️</button>
+<button onclick="alert('Wrong answer 😌❤️')">NO 😉</button>
+</div>
 </div>
 
 <script>
-function openPage(id){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-
-function checkPassword(){
-let pass=document.getElementById("password").value;
-if(pass==="0825"){
-openPage("welcome");
+function checkPass(){
+if(document.getElementById("pass").value==="0825"){
+next(1)
 }else{
-document.getElementById("error").innerText="Wrong password ❤️ Try again.";
+alert("Wrong Password ❤️")
 }
 }
 
-function celebrate(){
-for(let i=0;i<120;i++){
-let conf=document.createElement("div");
-conf.className="confetti";
-conf.style.left=Math.random()*100+"%";
-conf.style.background="hsl("+Math.random()*360+"deg,100%,50%)";
-document.body.appendChild(conf);
-}
-alert("She said YES ❤️🥹✨");
+function next(pageNumber){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+pageNumber).classList.add("active");
 }
 
-const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-noBtn.style.top=Math.random()*70+"%";
-noBtn.style.left=Math.random()*70+"%";
-});
+function yesLove(){
+alert("Forever Together ❤️ Happy Valentine’s Day My Love 💖");
+}
+
+for(let i=0;i<25;i++){
+let heart=document.createElement("span");
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"%";
+heart.style.animationDuration=(3+Math.random()*3)+"s";
+document.getElementById("hearts").appendChild(heart);
+}
 </script>
 
 </body>
