@@ -2,141 +2,203 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Love ❤️</title>
+
 <style>
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-  overflow: hidden;
-  text-align: center;
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#ffd6e0,#ff9aa2);
+  overflow-x:hidden;
+  text-align:center;
 }
 
-/* Container */
-.container {
-  padding-top: 80px;
+/* Floating hearts background */
+.bg-heart{
+  position:fixed;
+  font-size:18px;
+  animation: float 6s linear infinite;
+  opacity:0.6;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+
+/* Sections */
+.section{
+  display:none;
+  padding-top:100px;
+}
+
+.active{
+  display:block;
 }
 
 /* Buttons */
-button {
-  padding: 15px 25px;
-  margin: 10px;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  cursor: pointer;
-  background-color: #ff4d6d;
-  color: white;
-  transition: 0.3s;
+button{
+  padding:15px 25px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  margin:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-button:hover {
-  transform: scale(1.1);
+/* Cards */
+.card{
+  background:white;
+  width:260px;
+  margin:15px auto;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.15);
+  cursor:pointer;
 }
 
-/* Letter cards */
-.card {
-  background: white;
-  padding: 20px;
-  margin: 15px auto;
-  width: 250px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  cursor: pointer;
+/* Modal */
+#modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  justify-content:center;
+  align-items:center;
 }
 
-/* Heart animation */
-.heart {
-  position: fixed;
-  font-size: 20px;
-  animation: fall 3s linear infinite;
+.modal-content{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  width:80%;
 }
 
-@keyframes fall {
-  0% { transform: translateY(-10px); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+input{
+  padding:10px;
+  font-size:18px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  text-align:center;
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<!-- Unlock Page -->
+<div id="unlock" class="section active">
+  <h2>Enter 4 Digit Code 💌</h2>
+  <input type="password" id="code" maxlength="4"><br><br>
+  <button onclick="checkCode()">Unlock</button>
+</div>
 
+<!-- Main Page -->
+<div id="main" class="section">
   <h1>Open When ❤️</h1>
 
-  <div class="card" onclick="openLetter(1)">When you are sad</div>
-  <div class="card" onclick="openLetter(2)">When you miss me</div>
-  <div class="card" onclick="openLetter(3)">When you feel insecure</div>
-  <div class="card" onclick="openLetter(4)">When exams stress you</div>
-
-  <br><br>
+  <div class="card" onclick="openLetter(0)">When you are sad</div>
+  <div class="card" onclick="openLetter(1)">When you miss me</div>
+  <div class="card" onclick="openLetter(2)">When you feel insecure</div>
+  <div class="card" onclick="openLetter(3)">When exams stress you</div>
 
   <h2>Will you be mine forever? 💍</h2>
 
-  <button id="yesBtn">YES ❤️</button>
-  <button id="noBtn">NO 😏</button>
+  <button id="yes">YES ❤️</button>
+  <button id="no">NO 😏</button>
+</div>
 
+<!-- Modal -->
+<div id="modal">
+  <div class="modal-content">
+    <p id="letterText"></p>
+    <button onclick="closeModal()">Close</button>
+  </div>
 </div>
 
 <script>
 
-/* LETTERS */
-function openLetter(num) {
-  const letters = [
-    "Even on your worst days, you are my favorite person ❤️",
-    "If you miss me, just close your eyes… I’m always with you 💕",
-    "You are more beautiful and stronger than you think 🌸",
-    "You’ll ace every exam! I believe in you always 💖"
-  ];
-  alert(letters[num - 1]);
+/* Background floating hearts */
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.className="bg-heart";
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+},800);
+
+
+/* Unlock Code */
+function checkCode(){
+  const entered=document.getElementById("code").value;
+  if(entered==="1432"){   // CHANGE CODE HERE
+    document.getElementById("unlock").classList.remove("active");
+    document.getElementById("main").classList.add("active");
+  }else{
+    alert("Wrong Code 😜");
+  }
 }
 
-/* YES BUTTON */
-const yesBtn = document.getElementById("yesBtn");
+/* Letters */
+const letters=[
+  "Even on your worst days, I’m always here for you ❤️",
+  "If you miss me, just close your eyes… I’m right there 💕",
+  "You are stronger and more beautiful than you think 🌸",
+  "You will conquer every exam! I believe in you 💖"
+];
 
-yesBtn.addEventListener("click", function () {
+function openLetter(i){
+  document.getElementById("letterText").innerText=letters[i];
+  document.getElementById("modal").style.display="flex";
+}
 
-  document.body.innerHTML = `
-    <div style="padding-top:150px;">
-      <h1 style="color:#ff2e63; font-size:40px;">She Said YES 💍❤️</h1>
-      <h2>Forever Starts Now 🥹</h2>
-      <p style="font-size:20px;">I promise to love you every single day 💖</p>
-    </div>
-  `;
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
 
+/* YES Button */
+document.getElementById("yes").addEventListener("click",()=>{
+  document.body.innerHTML=`
+  <div style="padding-top:150px;">
+    <h1 style="color:#ff2e63;font-size:40px;">She Said YES 💍❤️</h1>
+    <h2>Forever Starts Now 🥹</h2>
+    <p>I promise to love you every single day 💖</p>
+  </div>`;
   sprinkleHearts();
 });
 
-/* NO BUTTON MOVES */
-const noBtn = document.getElementById("noBtn");
-
-noBtn.addEventListener("mouseover", function() {
-  const x = Math.floor(Math.random() * (window.innerWidth - 100));
-  const y = Math.floor(Math.random() * (window.innerHeight - 50));
-  noBtn.style.position = "absolute";
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+/* NO Button Moves (Mobile Safe) */
+document.getElementById("no").addEventListener("click",function(){
+  const x=Math.random()*(window.innerWidth-100);
+  const y=Math.random()*(window.innerHeight-50);
+  this.style.position="absolute";
+  this.style.left=x+"px";
+  this.style.top=y+"px";
 });
 
-/* HEART SPRINKLE FUNCTION */
-function sprinkleHearts() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+/* Sprinkle hearts after YES */
+function sprinkleHearts(){
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.innerHTML="💖";
+    heart.style.position="fixed";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.top="-10px";
+    heart.style.fontSize=(20+Math.random()*20)+"px";
+    heart.style.animation="fall 3s linear forwards";
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 3000);
-
-  }, 200);
+    setTimeout(()=>heart.remove(),3000);
+  },200);
 }
 
 </script>
