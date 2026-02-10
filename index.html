@@ -122,7 +122,7 @@ background:#8b0000;
 color:white;
 padding:25px;
 border-radius:20px;
-width:85%;
+width:90%;
 max-width:350px;
 margin-top:20px;
 }
@@ -204,15 +204,20 @@ position:relative;
 </div>
 </div>
 
-<!-- SONG -->
+<!-- SONG (AUTOPLAY EMBED) -->
 <div class="page" id="song">
-<h2>🎵 Our Song</h2>
+<h2>🎵 Our Song ❤️</h2>
 <div class="song">
 <h3>Co2</h3>
 <p>Prateek Kuhad</p>
-<a href="https://open.spotify.com/track/3hB9lDLyAClYVZivMMl20N?si=TcA9oF8NSIugpM5-H03Niw" target="_blank">
-<button>Play on Spotify 🎶</button>
-</a>
+
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/track/3hB9lDLyAClYVZivMMl20N?utm_source=generator&autoplay=1"
+width="100%" height="152"
+frameBorder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+
 </div>
 <button onclick="go('valentine')">Next ➡</button>
 </div>
@@ -228,12 +233,13 @@ position:relative;
 
 <script>
 
+/* Page Navigation */
 function go(id){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-/* Unlock code = 0825 */
+/* Unlock Code 0825 */
 function check(){
 if(document.getElementById("code").value==="0825"){
 go("p1");
@@ -242,6 +248,7 @@ alert("Wrong Code ❤️");
 }
 }
 
+/* Letter Popup */
 function openLetter(type){
 let text="";
 if(type==="l1") text="No matter what happens, I am always with you ❤️";
@@ -255,6 +262,7 @@ function closePop(){
 document.getElementById("popup").style.display="none";
 }
 
+/* NO button runs */
 function move(){
 let btn=document.getElementById("no");
 btn.style.position="absolute";
