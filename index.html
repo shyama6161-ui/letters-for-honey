@@ -15,7 +15,7 @@ body{
   text-align:center;
 }
 
-/* Floating hearts background */
+/* Floating hearts */
 .bg-heart{
   position:fixed;
   font-size:18px;
@@ -82,12 +82,36 @@ button{
   width:80%;
 }
 
+/* Input */
 input{
-  padding:10px;
-  font-size:18px;
-  border-radius:10px;
-  border:1px solid #ccc;
+  padding:15px;
+  font-size:20px;
+  border-radius:15px;
+  border:2px solid #ccc;
   text-align:center;
+  width:200px;
+  outline:none;
+}
+
+/* Shake animation */
+@keyframes shake{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  50%{transform:translateX(5px);}
+  75%{transform:translateX(-5px);}
+  100%{transform:translateX(0);}
+}
+
+.shake{
+  animation:shake 0.3s;
+  border-color:red;
+}
+
+#error{
+  color:red;
+  font-weight:bold;
+  margin-top:10px;
+  display:none;
 }
 
 </style>
@@ -97,7 +121,8 @@ input{
 <!-- Unlock Page -->
 <div id="unlock" class="section active">
   <h2>Enter 4 Digit Code 💌</h2>
-  <input type="password" id="code" maxlength="4"><br><br>
+  <input type="password" id="code" maxlength="4"><br>
+  <div id="error">Wrong Code 😜 Try Again!</div><br>
   <button onclick="checkCode()">Unlock</button>
 </div>
 
@@ -126,7 +151,7 @@ input{
 
 <script>
 
-/* Background floating hearts */
+/* Floating hearts background */
 setInterval(()=>{
   const heart=document.createElement("div");
   heart.className="bg-heart";
@@ -138,14 +163,18 @@ setInterval(()=>{
 },800);
 
 
-/* Unlock Code */
+/* PASSWORD 0825 */
 function checkCode(){
-  const entered=document.getElementById("code").value;
-  if(entered==="1432"){   // CHANGE CODE HERE
+  const input=document.getElementById("code");
+  const error=document.getElementById("error");
+
+  if(input.value==="0825"){
     document.getElementById("unlock").classList.remove("active");
     document.getElementById("main").classList.add("active");
   }else{
-    alert("Wrong Code 😜");
+    error.style.display="block";
+    input.classList.add("shake");
+    setTimeout(()=>input.classList.remove("shake"),300);
   }
 }
 
@@ -177,7 +206,7 @@ document.getElementById("yes").addEventListener("click",()=>{
   sprinkleHearts();
 });
 
-/* NO Button Moves (Mobile Safe) */
+/* NO Button Runs Away */
 document.getElementById("no").addEventListener("click",function(){
   const x=Math.random()*(window.innerWidth-100);
   const y=Math.random()*(window.innerHeight-50);
