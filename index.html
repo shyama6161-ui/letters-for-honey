@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shyam ❤️ Honey</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -16,53 +15,48 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-color:#333;
-overflow-x:hidden;
+background:linear-gradient(135deg,#f8cdda,#f6a4a4);
+overflow:hidden;
 }
 
+/* FLOATING HEARTS */
+.heart{
+position:fixed;
+bottom:-20px;
+color:#ff4d6d;
+font-size:20px;
+animation:float 6s linear infinite;
+opacity:0.7;
+}
+
+@keyframes float{
+0%{transform:translateY(0) translateX(0);}
+100%{transform:translateY(-100vh) translateX(50px);}
+}
+
+/* PAGES */
 .page{
 display:none;
-min-height:100vh;
+height:100vh;
+width:100%;
+position:absolute;
+top:0;
+left:0;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:20px;
 text-align:center;
+padding:20px;
 }
 
 .active{
 display:flex;
 }
 
-/* HOME PAGE */
-#home{
-background:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') center/cover no-repeat;
-color:white;
-}
-
-.overlay{
-background:rgba(0,0,0,0.5);
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-}
-
-.home-content{
-position:relative;
-z-index:2;
-}
-
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
+/* BUTTON */
 button{
-background:#ff4e73;
+background:#ff4d6d;
 color:white;
 border:none;
 padding:12px 30px;
@@ -72,41 +66,62 @@ cursor:pointer;
 margin-top:20px;
 }
 
+/* HOME */
+h1{
+font-size:30px;
+margin-bottom:10px;
+}
+
+h2{
+font-weight:400;
+margin-bottom:10px;
+}
+
 /* UNLOCK */
 .unlock-box{
 background:white;
-padding:40px;
+padding:35px;
 border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
 width:90%;
-max-width:400px;
+max-width:350px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 input{
 width:100%;
 padding:15px;
-margin-top:20px;
+margin:20px 0;
 border-radius:15px;
 border:1px solid #ddd;
 text-align:center;
 font-size:18px;
 }
 
+/* IMAGES PAGE */
+.photo{
+width:220px;
+border-radius:20px;
+margin:10px 0;
+}
+
+.caption{
+font-size:14px;
+margin-bottom:10px;
+}
+
 /* LETTERS */
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:20px;
-width:100%;
-max-width:500px;
-margin-top:30px;
+gap:15px;
+margin-top:20px;
 }
 
 .card{
 background:#ff6f91;
-padding:30px;
-border-radius:20px;
 color:white;
+padding:25px;
+border-radius:20px;
 font-weight:500;
 }
 
@@ -114,42 +129,38 @@ font-weight:500;
 .song-box{
 background:#8b0000;
 color:white;
-padding:20px;
+padding:25px;
 border-radius:20px;
+margin-top:20px;
 width:90%;
-max-width:500px;
-margin-top:30px;
+max-width:350px;
 }
 
 /* VALENTINE */
 .options{
 display:flex;
 gap:20px;
-margin-top:30px;
+margin-top:20px;
+position:relative;
 }
 
-img{
-width:200px;
-border-radius:20px;
-margin-top:20px;
+#noBtn{
+position:relative;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div class="page active" id="home">
-<div class="overlay"></div>
-<div class="home-content">
 <h1>Happy Valentine’s Day My Love ❤️</h1>
 <h2>Honey & Shyam</h2>
 <p>A story written in heartbeats 💓</p>
-<button onclick="nextPage('unlock')">Begin</button>
-</div>
+<button onclick="showPage('unlock')">Begin</button>
 </div>
 
-<!-- UNLOCK PAGE -->
+<!-- UNLOCK -->
 <div class="page" id="unlock">
 <div class="unlock-box">
 <h2>Enter 4 Digit Code 💌</h2>
@@ -158,20 +169,26 @@ margin-top:20px;
 </div>
 </div>
 
-<!-- FOREVER US PAGE WITH 4 PHOTOS -->
-<div class="page" id="forever">
+<!-- PHOTOS -->
+<div class="page" id="photos">
 <h1>Forever Us 💍</h1>
-<p>With you, forever doesn't feel long enough ❤️</p>
 
-<img src="photo1.jpg">
-<img src="photo2.jpg">
-<img src="photo3.jpg">
-<img src="photo4.jpg">
+<img src="photo1.jpg" class="photo">
+<p class="caption">Our beautiful beginning ❤️</p>
 
-<button onclick="nextPage('letters')">Next ➡</button>
+<img src="photo2.jpg" class="photo">
+<p class="caption">Smiles that mean the world 💕</p>
+
+<img src="photo3.jpg" class="photo">
+<p class="caption">Memories we cherish forever ✨</p>
+
+<img src="photo4.jpg" class="photo">
+<p class="caption">You & Me — Always ❤️</p>
+
+<button onclick="showPage('letters')">Next ➡</button>
 </div>
 
-<!-- LETTERS PAGE -->
+<!-- LETTERS -->
 <div class="page" id="letters">
 <h1>💌 Open When...</h1>
 
@@ -182,10 +199,10 @@ margin-top:20px;
 <div class="card">When exams stress you</div>
 </div>
 
-<button onclick="nextPage('song')">Next ➡</button>
+<button onclick="showPage('song')">Next ➡</button>
 </div>
 
-<!-- SONG PAGE -->
+<!-- SONG -->
 <div class="page" id="song">
 <h1>🎵 Our Song</h1>
 
@@ -197,33 +214,61 @@ margin-top:20px;
 </a>
 </div>
 
-<button onclick="nextPage('valentine')">Next ➡</button>
+<button onclick="showPage('valentine')">Next ➡</button>
 </div>
 
-<!-- VALENTINE PAGE -->
+<!-- VALENTINE -->
 <div class="page" id="valentine">
 <h1>Will you be mine forever? 💍</h1>
 
 <div class="options">
-<button>YES ❤️</button>
-<button>NO 😉</button>
+<button onclick="yesLove()">YES ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">NO 😉</button>
 </div>
 </div>
 
 <script>
-function nextPage(id){
+
+/* PAGE SWITCH */
+function showPage(id){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
+/* CODE CHECK */
 function checkCode(){
-let userCode=document.getElementById('code').value;
-if(userCode==="1616"){ 
-nextPage('forever');
+if(document.getElementById('code').value==="1616"){
+showPage('photos');
 }else{
 alert("Wrong Code ❤️");
 }
 }
+
+/* YES BUTTON */
+function yesLove(){
+alert("Yayyyyy ❤️ I love you forever Honey 💍💖");
+}
+
+/* NO BUTTON RUN */
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.top=Math.random()*200+"px";
+btn.style.left=Math.random()*200+"px";
+}
+
+/* FLOATING HEARTS */
+function createHearts(){
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(createHearts,500);
+
 </script>
 
 </body>
