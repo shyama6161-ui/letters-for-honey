@@ -15,6 +15,25 @@ body{
   text-align:center;
 }
 
+/* Romantic glow container */
+.container{
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  margin:40px 15px;
+  padding:30px 20px;
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Main Photo */
+.main-photo{
+  width:85%;
+  max-width:350px;
+  border-radius:25px;
+  margin-top:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
 /* Floating hearts */
 .bg-heart{
   position:fixed;
@@ -29,18 +48,12 @@ body{
 }
 
 /* Sections */
-.section{
-  display:none;
-  padding-top:100px;
-}
-
-.active{
-  display:block;
-}
+.section{ display:none; }
+.active{ display:block; }
 
 /* Buttons */
 button{
-  padding:15px 25px;
+  padding:14px 28px;
   border:none;
   border-radius:30px;
   background:#ff4d6d;
@@ -54,9 +67,9 @@ button{
 /* Cards */
 .card{
   background:white;
-  width:260px;
-  margin:15px auto;
-  padding:20px;
+  width:85%;
+  margin:12px auto;
+  padding:15px;
   border-radius:20px;
   box-shadow:0 5px 20px rgba(0,0,0,0.15);
   cursor:pointer;
@@ -93,7 +106,7 @@ input{
   outline:none;
 }
 
-/* Shake animation */
+/* Shake */
 @keyframes shake{
   0%{transform:translateX(0);}
   25%{transform:translateX(-5px);}
@@ -110,48 +123,16 @@ input{
 #error{
   color:red;
   font-weight:bold;
-  margin-top:10px;
   display:none;
+  margin-top:8px;
 }
 
 </style>
 </head>
 <body>
 
-<!-- Unlock Page -->
-<div id="unlock" class="section active">
-  <h2>Enter 4 Digit Code 💌</h2>
-  <input type="password" id="code" maxlength="4"><br>
-  <div id="error">Wrong Code 😜 Try Again!</div><br>
-  <button onclick="checkCode()">Unlock</button>
-</div>
-
-<!-- Main Page -->
-<div id="main" class="section">
-  <h1>Open When ❤️</h1>
-
-  <div class="card" onclick="openLetter(0)">When you are sad</div>
-  <div class="card" onclick="openLetter(1)">When you miss me</div>
-  <div class="card" onclick="openLetter(2)">When you feel insecure</div>
-  <div class="card" onclick="openLetter(3)">When exams stress you</div>
-
-  <h2>Will you be mine forever? 💍</h2>
-
-  <button id="yes">YES ❤️</button>
-  <button id="no">NO 😏</button>
-</div>
-
-<!-- Modal -->
-<div id="modal">
-  <div class="modal-content">
-    <p id="letterText"></p>
-    <button onclick="closeModal()">Close</button>
-  </div>
-</div>
-
+<!-- Floating Hearts -->
 <script>
-
-/* Floating hearts background */
 setInterval(()=>{
   const heart=document.createElement("div");
   heart.className="bg-heart";
@@ -161,9 +142,48 @@ setInterval(()=>{
   document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),6000);
 },800);
+</script>
 
+<!-- UNLOCK PAGE -->
+<div id="unlock" class="section active container">
+  <h2>Enter 4 Digit Code 💌</h2>
+  <input type="password" id="code" maxlength="4"><br>
+  <div id="error">Wrong Code 😜 Try Again!</div><br>
+  <button onclick="checkCode()">Unlock</button>
+</div>
 
-/* PASSWORD 0825 */
+<!-- MAIN PAGE -->
+<div id="main" class="section container">
+
+  <h1>For My Love ❤️</h1>
+
+  <img src="photo1.jpg" class="main-photo">
+
+  <h2 style="margin-top:25px;">Open When 💖</h2>
+
+  <div class="card" onclick="openLetter(0)">When you are sad</div>
+  <div class="card" onclick="openLetter(1)">When you miss me</div>
+  <div class="card" onclick="openLetter(2)">When you feel insecure</div>
+  <div class="card" onclick="openLetter(3)">When exams stress you</div>
+
+  <h2 style="margin-top:25px;">Will you be mine forever? 💍</h2>
+
+  <button id="yes">YES ❤️</button>
+  <button id="no">NO 😏</button>
+
+</div>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-content">
+    <p id="letterText"></p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+
+/* PASSWORD = 0825 */
 function checkCode(){
   const input=document.getElementById("code");
   const error=document.getElementById("error");
@@ -195,7 +215,7 @@ function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* YES Button */
+/* YES */
 document.getElementById("yes").addEventListener("click",()=>{
   document.body.innerHTML=`
   <div style="padding-top:150px;">
@@ -206,7 +226,7 @@ document.getElementById("yes").addEventListener("click",()=>{
   sprinkleHearts();
 });
 
-/* NO Button Runs Away */
+/* NO runs away */
 document.getElementById("no").addEventListener("click",function(){
   const x=Math.random()*(window.innerWidth-100);
   const y=Math.random()*(window.innerHeight-50);
@@ -215,7 +235,7 @@ document.getElementById("no").addEventListener("click",function(){
   this.style.top=y+"px";
 });
 
-/* Sprinkle hearts after YES */
+/* Heart sprinkle */
 function sprinkleHearts(){
   setInterval(()=>{
     const heart=document.createElement("div");
@@ -224,7 +244,7 @@ function sprinkleHearts(){
     heart.style.left=Math.random()*100+"vw";
     heart.style.top="-10px";
     heart.style.fontSize=(20+Math.random()*20)+"px";
-    heart.style.animation="fall 3s linear forwards";
+    heart.style.animation="float 3s linear forwards";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),3000);
   },200);
@@ -233,4 +253,5 @@ function sprinkleHearts(){
 </script>
 
 </body>
+</html></body>
 </html>
